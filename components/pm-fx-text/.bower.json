@@ -1,0 +1,43 @@
+{
+  "name": "pm-fx-text",
+  "authors": [
+    "Noah Laux <noahlaux@gmail.com>"
+  ],
+  "description": "Animated text fx",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "fx",
+    "text",
+    "animation"
+  ],
+  "main": "pm-fx-text.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "http://noahlaux.github.io/pm-fx-text",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-pages": "PolymerElements/iron-pages#~1.0.5",
+    "neon-animation": "PolymerElements/neon-animation#~1.0.9"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^3.4.0",
+    "google-feeds": "GoogleWebComponents/google-feeds#~1.0.2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.0.3",
+    "paper-spinner": "PolymerElements/paper-spinner#^1.1.0"
+  },
+  "_release": "35ccc5e045",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "35ccc5e04560d61a03dc2cbd8aa2b919e1ce6363"
+  },
+  "_source": "git://github.com/noahlaux/pm-fx-text.git",
+  "_target": "master",
+  "_originalSource": "noahlaux/pm-fx-text",
+  "_direct": true
+}

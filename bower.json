@@ -1,0 +1,34 @@
+{
+  "name": "pm-fx-text",
+  "version": "0.0.9",
+  "authors": [
+    "Noah Laux <noahlaux@gmail.com>"
+  ],
+  "description": "Animated text fx",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "fx",
+    "text",
+    "animation"
+  ],
+  "main": "pm-fx-text.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "http://noahlaux.github.io/pm-fx-text",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-pages": "PolymerElements/iron-pages#~1.0.5",
+    "neon-animation": "PolymerElements/neon-animation#~1.0.9"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^3.4.0",
+    "google-feeds": "GoogleWebComponents/google-feeds#~1.0.2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.0.3",
+    "paper-spinner": "PolymerElements/paper-spinner#^1.1.0"
+  }
+}
