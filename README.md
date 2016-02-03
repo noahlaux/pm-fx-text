@@ -1,7 +1,8 @@
-# pm-rotating-text
+# pm-fx-text
 
-An element providing a starting point for your own reusable Polymer elements.
+A fancy highly configurable text effect web component (using Polymer).
 
+Check it out here [http://noahlaux.github.io/pm-fx-text](http://noahlaux.github.io/pm-fx-text)
 
 ## Dependencies
 
