@@ -1,0 +1,227 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-selector/iron-selectable.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../neon-animation/animations/cascaded-animation.html">
+<link rel="import" href="rotate-in-animation.html">
+<link rel="import" href="rotate-out-animation.html">
+
+
+<!--
+`<pm-rotating-text>` is a fancy rotating text
+
+Example:
+
+    <span>Never gonna
+        <pm-rotating-text>
+            <span>give you up</span>
+            <span>never gonna let you down</span>
+            <span>around and desert you</span>
+            <span>make you cry</span>
+            <span>say goodbye</span>
+            <span>tell a lie and hurt you</span>
+        </pm-rotating-text>
+    </span>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="pm-rotating-text">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        vertical-align: text-top;
+        position: relative;
+      }
+
+      :host > ::content > :not(#wrapper) {
+        display: none !important;
+      }
+
+      #wrapper {
+        overflow: hidden;
+      }
+
+      iron-pages > :not(.iron-selected) {
+        display: table !important;
+        opacity: 0;
+      }
+
+      .line {
+        display: table;
+        position: absolute;
+        white-space: pre;/*
+        transform: translateZ(0);
+        -webkit-backface-visibility: hidden;*/
+      }
+
+      .letter {
+        display: inline-block;
+        transform: translateZ(25px);
+      }
+
+      .exit-nodes {
+        opacity: 1 !important;
+      }
+
+    </style>
+
+    <content id="content"></content>
+
+    <iron-pages id="wrapper" selected="[[ selected ]]">
+      <template is="dom-repeat" items="[[ lines ]]" as="line">
+        <span class$="[[ line.className ]]">
+          <template is="dom-repeat" items="[[ line.letters ]]" as="letter">
+            <span class="letter">[[ letter ]]</span>
+          </template>
+        </span>
+      </template>
+    </iron-pages>
+  </template>
+  <script>
+    (function() {
+
+      Polymer({
+
+        is: 'pm-rotating-text',
+
+        behaviors: [
+          Polymer.IronSelectableBehavior,
+          Polymer.NeonAnimationRunnerBehavior
+        ],
+
+        properties: {
+
+          selected: {
+            value: 0
+          },
+
+          /**
+           * Interval between transitions
+           */
+          interval: {
+            type: Number,
+            value: 2000,
+            notify: true
+          },
+
+          /**
+           * Auto advances slides in each interval
+           */
+          autoAdvance: {
+            type: Boolean,
+            notify: true,
+            value: true
+          },
+
+          entryAnimation: String,
+
+          exitAnimation: String,
+
+          _lines: {
+            type: Array,
+            value: function () {
+              return [];
+            }
+          },
+
+          animationConfig: {
+              type: Object,
+              value: function() {
+                  return {
+                      'entry': {
+                          name: 'cascaded-animation',
+                          animation: 'rotate-in-animation',
+                          timing: {
+                            delay: 100
+                            // easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                          }
+                      },
+                      'exit': {
+                          name: 'cascaded-animation',
+                          animation: 'rotate-out-animation',
+                          timing: {
+                            // easing: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)'
+                          }
+                      }
+                  };
+              }
+          }
+        },
+
+        observers: [
+          '_setupInterval(interval, autoAdvance)'
+        ],
+
+        listeners: {
+          'iron-items-changed': '_parseNewItems',
+          'wrapper.iron-select': '_performEntry',
+          'wrapper.iron-deselect': '_performExit',
+          'neon-animation-finish': '_finish'
+        },
+
+        _setupInterval: function (interval, autoAdvance) {
+          if (this.intervalId || !autoAdvance) {
+            clearInterval(this.intervalId);
+          }
+
+          if (autoAdvance) {
+            this.intervalId = setInterval(this.selectNext.bind(this), interval);
+          }
+        },
+
+        _finish: function (event, detail) {
+          var cleanUpNodes = this.$.wrapper.queryAllEffectiveChildren('.exit-nodes');
+          cleanUpNodes.forEach(function (node) {
+            Polymer.dom(node).classList.remove('exit-nodes');
+          });
+        },
+
+        _parseNewItems: function (event, info) {
+          var lines = info.addedNodes
+            .filter(function (node) {
+              return node.nodeType === Node.ELEMENT_NODE;
+            })
+            .map(function (node) {
+              return {
+                letters: node.textContent.split(''),
+                className: 'line ' + node.className
+              };
+            });
+
+          this.set('lines', lines);
+        },
+
+        _performEntry: function (event, detail) {
+          var nodes = Polymer.dom(detail.item).children;
+
+          this._performAnimation('entry', {
+            nodes: nodes
+          });
+        },
+
+        _performExit: function (event, detail) {
+          Polymer.dom(detail.item).classList.add('exit-nodes');
+
+          var nodes = Polymer.dom(detail.item).children;
+
+          this._performAnimation('exit', {
+            nodes: nodes
+          });
+        },
+
+        _performAnimation: function (name, config) {
+          var animation = this.animationConfig[name];
+
+          animation.nodes = config.nodes;
+          animation.nodeDelay = (animation.timing.duration || 380) / animation.nodes.length;
+
+          this.playAnimation(name);
+        }
+
+      });
+
+  })();
+  </script>
+</dom-module>

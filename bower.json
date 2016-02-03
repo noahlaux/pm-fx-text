@@ -1,0 +1,31 @@
+{
+  "name": "pm-rotating-text",
+  "version": "1.0.6",
+  "authors": [
+    "Anonymous <anonymous@example.com>"
+  ],
+  "description": "An element providing a solution to no problem in particular.",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "seed"
+  ],
+  "main": "pm-rotating-text.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "iron-pages": "PolymerElements/iron-pages#~1.0.5",
+    "neon-animation": "PolymerElements/neon-animation#~1.0.9"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "^3.4.0",
+    "google-feeds": "GoogleWebComponents/google-feeds#~1.0.2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.0.3"
+  }
+}

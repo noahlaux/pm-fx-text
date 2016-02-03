@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>pm-rotating-text Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../pm-rotating-text.html">
+    <link rel="import" href="../../google-feeds/google-feeds.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="bounce-in-animation.html">
+    <link rel="import" href="../../neon-animation/animations/fade-in-animation.html">
+    <link rel="import" href="../../neon-animation/animations/scale-up-animation.html">
+    <link rel="import" href="../../neon-animation/animations/scale-down-animation.html">
+    <link rel="import" href="../../neon-animation/animations/slide-down-animation.html">
+    <link rel="import" href="../../neon-animation/animations/transform-animation.html">
+
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Open+Sans:600);
+       /* @import url(https://fonts.googleapis.com/css?family=Special+Elite);
+        @import url(https://fonts.googleapis.com/css?family=Press+Start+2P);*/
+        @import url(https://fonts.googleapis.com/css?family=Finger+Paint);
+
+        body {
+          font-family: 'Open Sans', sans-serif;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .engadget {
+            /*font-family: 'Special Elite', cursive;*/
+            /*font-family: 'Press Start 2P', cursive;*/
+            font-family: 'Finger Paint', cursive;
+            /*text-transform: uppercase;*/
+        }
+
+        .rick {
+          font-weight: 600;
+          font-size: 40px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: green;
+        }
+    </style>
+</head>
+
+<body unresolved>
+
+    <template is="dom-bind">
+        <label>Interval
+            <input type="range" min="100" max="10000" value="{{ interval::input}}"> [[ interval ]] ms
+        </label>
+
+        <label>Auto advance
+            <input type="checkbox" checked="{{ autoAdvance::change }}">
+        </label>
+
+        <button on-tap="next">next</button>
+        <button on-tap="previous">previous</button>
+        <hr>
+
+        <h4>Give it up for Rick</h4>
+        <div class="rick">
+            Never gonna
+            <pm-rotating-text id="rotating" interval="{{ interval }}" auto-advance="{{ autoAdvance }}">
+                <span class="red">give you up</span>
+                <span>let you down</span>
+                <span class="green">turn around and desert you</span>
+                <span>make you cry</span>
+                <span>say goodbye</span>
+                <span>tell a lie and hurt you</span>
+            </pm-rotating-text>
+        </div>
+
+      <!--   <h4>Fancy <a target="_blank" href="https://news.ycombinator.com/">Hackernews</a></h4>
+        <div class="engadget">
+            <google-feeds feed="https://news.ycombinator.com/rss" results="{{ result }}"></google-feeds>
+            <pm-rotating-text interval="4500">
+                <template is="dom-repeat" items="[[ result.entries ]]">
+                    <a href="[[ item.link ]]">[[ item.title ]]</a>
+                </template>
+            </pm-rotating-text>
+        </div> -->
+
+    </template>
+
+    <script>
+        var scope = document.querySelector('template[is="dom-bind"]')
+
+        scope.next = function () {
+            scope.$.rotating.selectNext();
+        };
+
+        scope.previous = function () {
+            scope.$.rotating.selectPrevious();
+        };
+    </script>
+
+</body>
+
+</html>
