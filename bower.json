@@ -1,18 +1,20 @@
 {
-  "name": "pm-rotating-text",
-  "version": "1.0.6",
+  "name": "pm-fx-text",
+  "version": "0.0.9",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Noah Laux <noahlaux@gmail.com>"
   ],
-  "description": "An element providing a solution to no problem in particular.",
+  "description": "Animated text fx",
   "keywords": [
     "web-component",
     "polymer",
-    "seed"
+    "fx",
+    "text",
+    "animation"
   ],
-  "main": "pm-rotating-text.html",
+  "main": "pm-fx-text.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "homepage": "http://noahlaux.github.io/pm-fx-text",
   "ignore": [
     "/.*",
     "/test/"
